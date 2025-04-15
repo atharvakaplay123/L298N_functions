@@ -15,13 +15,13 @@ void setup() {
   pinMode(EN2, OUTPUT);
 }
 */
-void Move(bool en1_direction, bool en2_direction, float en1, float en2){
+void Move(bool en1_direction, bool en2_direction, float en1_speed, float en2_speed){
     digitalWrite(IN1, en1_direction);
     digitalWrite(IN2, !en1_direction);
     digitalWrite(IN3, en2_direction);
     digitalWrite(IN4, !en2_direction);
-    analogWrite(EN1, en1);
-    analogWrite(EN2, en2); 
+    analogWrite(EN1, en1_speed);
+    analogWrite(EN2, en2_speed); 
 }
 
 void Stop() {
