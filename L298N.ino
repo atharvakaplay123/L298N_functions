@@ -43,6 +43,22 @@ public:
     analogWrite(EN1, en1_speed);
     analogWrite(EN2, en2_speed);
   }
+  void Move(bool en1_direction, bool en2_direction, float speed) {
+    digitalWrite(IN1, en1_direction);
+    digitalWrite(IN2, !en1_direction);
+    digitalWrite(IN3, en2_direction);
+    digitalWrite(IN4, !en2_direction);
+    analogWrite(EN1, speed);
+    analogWrite(EN2, speed);
+  }
+  void Move(bool en1_direction, bool en2_direction) {
+    digitalWrite(IN1, en1_direction);
+    digitalWrite(IN2, !en1_direction);
+    digitalWrite(IN3, en2_direction);
+    digitalWrite(IN4, !en2_direction);
+    analogWrite(EN1, 255);
+    analogWrite(EN2, 255);
+  }
 
   void Stop() {
     digitalWrite(IN1, LOW);
@@ -52,4 +68,4 @@ public:
     analogWrite(EN1, 0);
     analogWrite(EN2, 0);
   }
-}
+};
