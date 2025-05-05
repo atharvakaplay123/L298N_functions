@@ -1,73 +1,55 @@
 /*
-int IN1 = 9;  //Left(-)
-int IN2 = 8;  //Left(+)
-
-int IN3 = 11;  //Right(-)
-int IN4 = 10;  //Right(+)
+L298N motor(4, 5, 6, 7, 8, 9); // IN1-IN4, EN1, EN2
 
 void setup() {
-  Serial.begin(9600);
-  pinMode(IN1, OUTPUT);
-  pinMode(IN2, OUTPUT);
-  pinMode(IN3, OUTPUT);
-  pinMode(IN4, OUTPUT);
-  pinMode(EN1, OUTPUT);
-  pinMode(EN2, OUTPUT);
+  // no pinMode needed here — constructor handles it
 }
+
+void loop() {
+  motor.Move(1, 1, 200, 200);
+  delay(2000);
+  motor.Stop();
+  delay(1000);
+}
+
 */
-void Move(bool en1_direction, bool en2_direction, float en1_speed, float en2_speed){
+
+class L298N {
+private:
+  int IN1, IN2, IN3, IN4, EN1, EN2;
+
+public:
+  L298N(int in1, int in2, int in3, int in4, int en1, int en2) {
+    IN1 = in1;
+    IN2 = in2;
+    IN3 = in3;
+    IN4 = in4;
+    EN1 = en1;
+    EN2 = en2;
+
+    pinMode(IN1, OUTPUT);
+    pinMode(IN2, OUTPUT);
+    pinMode(IN3, OUTPUT);
+    pinMode(IN4, OUTPUT);
+    pinMode(EN1, OUTPUT);
+    pinMode(EN2, OUTPUT);
+  }
+
+  void Move(bool en1_direction, bool en2_direction, float en1_speed, float en2_speed) {
     digitalWrite(IN1, en1_direction);
     digitalWrite(IN2, !en1_direction);
     digitalWrite(IN3, en2_direction);
     digitalWrite(IN4, !en2_direction);
     analogWrite(EN1, en1_speed);
-    analogWrite(EN2, en2_speed); 
-}
+    analogWrite(EN2, en2_speed);
+  }
 
-void Stop() {
-  digitalWrite(IN1, LOW);
-  digitalWrite(IN2, LOW);
-  digitalWrite(IN3, LOW);
-  digitalWrite(IN4, LOW);
-  analogWrite(EN1, 0);
-  analogWrite(EN1, 0);
-  //Serial.println("Stop");
+  void Stop() {
+    digitalWrite(IN1, LOW);
+    digitalWrite(IN2, LOW);
+    digitalWrite(IN3, LOW);
+    digitalWrite(IN4, LOW);
+    analogWrite(EN1, 0);
+    analogWrite(EN2, 0);
+  }
 }
-/*
-void Forward(int en1, int en2) {
-  digitalWrite(IN1, LOW);
-  digitalWrite(IN2, HIGH);
-  digitalWrite(IN3, LOW);
-  digitalWrite(IN4, HIGH);
-  analogWrite(EN1, en1);
-  analogWrite(EN1, en2);
-  //Serial.println("Forward");
-}
-void Backward(int en1, int en2) {
-  digitalWrite(IN1, HIGH);
-  digitalWrite(IN2, LOW);
-  digitalWrite(IN3, HIGH);
-  digitalWrite(IN4, LOW);
-  analogWrite(EN1, en1);
-  analogWrite(EN1, en2);
-  //Serial.println("Backward");
-}
-void Left(int en1, int en2) {
-  digitalWrite(IN1, HIGH);
-  digitalWrite(IN2, LOW);
-  digitalWrite(IN3, LOW);
-  digitalWrite(IN4, HIGH);
-  analogWrite(EN1, en1);
-  analogWrite(EN1, en2);
-  //Serial.println("Left");
-}
-void Right(int en1, int en2) {
-  digitalWrite(IN1, LOW);
-  digitalWrite(IN2, HIGH);
-  digitalWrite(IN3, HIGH);
-  digitalWrite(IN4, LOW);
-  analogWrite(EN1, en1);
-  analogWrite(EN1, en2);
-  //Serial.println("Right");
-}
-*/
