@@ -18,9 +18,10 @@ class L298N {
 private:
   int IN1, IN2, IN3, IN4, EN1, EN2;
   bool Debug=0;
+  float MaxSpeed;
 
 public:
-  L298N(int in1, int in2, int in3, int in4, int en1, int en2, bool debug=0) {
+  L298N(int in1, int in2, int in3, int in4, int en1, int en2, float max=255, bool debug=0) {
     IN1 = in1;
     IN2 = in2;
     IN3 = in3;
@@ -28,6 +29,7 @@ public:
     EN1 = en1;
     EN2 = en2;
     Debug = debug;
+    MaxSpeed = max;
     
     pinMode(IN1, OUTPUT);
     pinMode(IN2, OUTPUT);
@@ -37,7 +39,7 @@ public:
     pinMode(EN2, OUTPUT);
   }
 
-  void Move(bool en1_direction, bool en2_direction, float en1_speed=255, float en2_speed=255) {
+  void Move(bool en1_direction, bool en2_direction, float en1_speed=MaxSpeed, float en2_speed=MaxSpeed) {
     digitalWrite(IN1, en1_direction);
     digitalWrite(IN2, !en1_direction);
     digitalWrite(IN3, en2_direction);
@@ -55,7 +57,7 @@ public:
       Serial.println(en2_speed);
     }
   }
-  // void Move(bool en1_direction, bool en2_direction, float speed) {
+  // void Move(bool en1_direction, bool en2_direction, float speed=MaxSpeed) {
   //   digitalWrite(IN1, en1_direction);
   //   digitalWrite(IN2, !en1_direction);
   //   digitalWrite(IN3, en2_direction);
@@ -68,8 +70,8 @@ public:
   //   digitalWrite(IN2, !en1_direction);
   //   digitalWrite(IN3, en2_direction);
   //   digitalWrite(IN4, !en2_direction);
-  //   analogWrite(EN1, 255);
-  //   analogWrite(EN2, 255);
+  //   analogWrite(EN1, MaxSpeed);
+  //   analogWrite(EN2, MaxSpeed);
   // }
 
   void Stop() {
