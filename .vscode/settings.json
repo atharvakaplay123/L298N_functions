@@ -1,0 +1,8 @@
+{
+    "arduino.logLevel": "verbose",
+    "arduino.openPDEFiletype": true,
+    "arduino.enableUSBDetection": true,
+    "arduino.useArduinoCli": true,
+    "arduino.path": "C:\\Program Files\\Arduino IDE",
+    "arduino.commandPath": "run-arduino.bat"
+}
