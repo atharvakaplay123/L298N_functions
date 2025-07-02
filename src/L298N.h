@@ -10,10 +10,10 @@ private:
 
 public:
   L298N(int in1, int in2, int in3, int in4, int en1, int en2, float max = 255, bool debug = 0);
-  void Move(bool en1_direction, bool en2_direction, float en1_speed = MaxSpeed, float en2_speed = MaxSpeed);
+  void Move(bool en1_direction, bool en2_direction, float en1_speed = 255, float en2_speed = 255);
   void Stop();
   // void Move(bool en1_direction, bool en2_direction, float speed = MaxSpeed);
   // void Move(bool en1_direction, bool en2_direction);
 };
 
-#endif L298N_H
+#endif

@@ -10,7 +10,7 @@
   Version: 1.0
 
   Description:
-    Controls two DC motors connected to an L298N motor driver.
+    Controls two or four DC motors connected to an L298N motor driver.
     The example moves the robot forward, left, right, backward, and then stops — each for 1 second.
 
   Connections:
@@ -51,6 +51,7 @@
   Note:
     No pinMode calls are needed — the constructor sets pin modes automatically.
 */
+#include <arduino.h>
 #include <L298N.h>
 L298N motor(4, 5, 6, 7, 8, 9); // IN1-IN4, EN1, EN2
 
@@ -61,7 +62,7 @@ void setup()
 
 void loop()
 {
-  motor.Move(1, 1, 200, 200); // Move Forward
+  motor.Move(1, 1); // Move Forward (only direction, no speed controll)
   delay(1000);
 
   motor.Move(0, 1, 200, 200); // Move Left
